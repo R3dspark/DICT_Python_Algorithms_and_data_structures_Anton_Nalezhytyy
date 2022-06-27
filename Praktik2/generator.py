@@ -5,14 +5,14 @@ from Praktik2.ram_specification import corsair, hyperX, corsair_type, hyperX_typ
 
 class Generator:
     def _create_manufacture(self) -> str:
-        self.manufacture = random.choice(["Corsair", "AMD"])
+        self.manufacture = random.choice(["Corsair", "HyperX"])
         return self.manufacture
 
     def _create_series(self) -> str:
         if self.manufacture == "Corsair":
-            self.series = random.choice(random.choice([i for i in corsair.keys()]))
+            self.series = random.choice(list(corsair.keys()))
         else:
-            self.series = random.choice(random.choice([i for i in hyperX.keys()]))
+            self.series = random.choice(list(hyperX.keys()))
         return self.series
 
     def _create_type(self) -> str:
@@ -30,40 +30,44 @@ class Generator:
         if self.manufacture == "Corsair":
             if self.series == "ValueSelect":
                 self.memory = 2
-                self.mod = ""
                 self.frequency = 800.0
+                self.mod = ""
                 self.prefix = ""
-            if self.series == "Vengeance":
-                self.mod = random.choice(["LP", "Pro", "LPX"])
-                if self.mod == "LP":
-                    self.memory = random.randint(4, 8)
+            if self.series == "VengeanceLP":
+                self.memory = random.choice([4, 8])
+                self.frequency = 1600.0
+                self.mod = ""
+                self.prefix = ""
+            elif self.series == "VengeancePro":
+                self.memory = random.choice([4, 8])
+                if self.memory == 4:
                     self.frequency = 1600.0
-                elif self.mod == "Pro":
-                    if self.type == "DDR3":
-                        self.memory = random.randint(4, 8)
-                        if self.memory == 4:
-                            self.frequency = 1600.0
-                        else:
-                            self.frequency = 2400.0
-                    else:
-                        self.memory = random.randint(8, 16)
-                        if self.memory == 8:
-                            self.frequency = random.choice([2133.0, 2666.0, 3000.0, 3200.0, 3600.0, 4000.0])
-                        else:
-                            self.frequency = random.choice([3000.0, 3200.0, 3600.0])
-                elif self.mod == "LPX":
-                    self.memory = random.choice([4, 8, 16, 32])
-                    if self.memory == 4:
-                        self.frequency = random.choice([2133.0, 2400.0])
-                    elif self.memory == 8:
-                        self.frequency = random.choice([1600.0, 2133.0, 2400.0, 2666.0, 3000.0, 3200.0, 3600.0, 4000.0, 4133.0, 4266.0, 4333.0, 4400.0])
-                    elif self.memory == 16:
-                        self.frequency = random.choice([2400.0, 2666.0, 3000.0, 3200.0, 3600.0, 4000.0, 4133.0])
-                    elif self.memory == 32:
-                        self.frequency = random.choice([2400.0, 2666.0, 3200.0])
+                else:
+                    self.frequency = 2400.0
+                self.mod = ""
+                self.prefix = ""
+            elif self.series == "VengeancePRO":
+                self.memory = random.choice([8, 16])
+                if self.memory == 8:
+                    self.frequency = random.choice([2133.0, 2666.0, 3000.0, 3200.0, 3600.0, 4000.0])
+                else:
+                    self.frequency = random.choice([3000.0, 3200.0, 3600.0])
+                self.mod = ""
+                self.prefix = ""
+            elif self.series == "VengeanceLPX":
+                self.memory = random.choice([4, 8, 16, 32])
+                if self.memory == 4:
+                    self.frequency = random.choice([2133.0, 2400.0])
+                elif self.memory == 8:
+                    self.frequency = random.choice([1600.0, 2133.0, 2400.0, 2666.0, 3000.0, 3200.0, 3600.0, 4000.0, 4133.0, 4266.0, 4333.0, 4400.0])
+                elif self.memory == 16:
+                    self.frequency = random.choice([2400.0, 2666.0, 3000.0, 3200.0, 3600.0, 4000.0, 4133.0])
+                elif self.memory == 32:
+                    self.frequency = random.choice([2400.0, 2666.0, 3200.0])
+                self.mod = ""
                 self.prefix = ""
             elif self.series == "Dominator":
-                self.memory = random.randint(8, 16)
+                self.memory = random.choice([8, 16])
                 if self.memory == 8:
                     self.frequency = random.choice([3000.0, 3200.0, 3466.0, 3600.0, 4000.0])
                 elif self.memory == 16:
@@ -74,22 +78,33 @@ class Generator:
                 self.mod, self.memory, self.frequency = "ERROR", 0, 0.0
         else:
             if self.series == "Fury":
-                if self.type == "DDR3":
-                    self.memory = random.randint(4, 8)
-                    if self.memory == 4:
-                        self.frequency = random.choice([1333.0, 1600.0, 1866.0])
-                    else:
-                        self.frequency = random.choice([1600.0, 1866.0])
+                self.memory = random.choice([4, 8])
+                if self.memory == 4:
+                    self.frequency = random.choice([1333.0, 1600.0, 1866.0])
                 else:
-                    self.memory = random.choice([4, 8, 16, 32])
-                    if self.memory == 4:
-                        self.frequency = random.choice([2666.0, 3000.0, 3200.0])
-                    elif self.memory == 8:
-                        self.frequency = random.choice([2133.0, 2666.0, 3200.0, 3466.0, 3600.0, 3733.0])
-                    elif self.memory == 16:
-                        self.frequency = random.choice([2400.0, 2666.0, 3000.0, 3200.0, 3466.0, 3600.0, 3733.0])
-                    elif self.memory == 32:
-                        self.frequency = random.choice([2666.0, 3000.0, 3200.0, 3466.0, 3600.0])
+                    self.frequency = random.choice([1600.0, 1866.0])
+                self.mod = ""
+                self.prefix = ""
+            elif self.series == "FURY":
+                self.memory = random.choice([4, 8, 16, 32])
+                if self.memory == 4:
+                    self.frequency = random.choice([2666.0, 3000.0, 3200.0])
+                elif self.memory == 8:
+                    self.frequency = random.choice([2133.0, 2666.0, 3200.0, 3466.0, 3600.0, 3733.0])
+                elif self.memory == 16:
+                    self.frequency = random.choice([2400.0, 2666.0, 3000.0, 3200.0, 3466.0, 3600.0, 3733.0])
+                elif self.memory == 32:
+                    self.frequency = random.choice([2666.0, 3000.0, 3200.0, 3466.0, 3600.0])
+                self.mod = ""
+                self.prefix = ""
+            elif self.series == "Predator":
+                self.memory = random.choice([8, 16, 32])
+                if self.memory == 8:
+                    self.frequency = random.choice([3000.0, 3200.0, 3333.0, 3600.0, 4000.0])
+                elif self.memory == 16:
+                    self.frequency = random.choice([3000.0, 3200.0, 3333.0, 3600.0])
+                elif self.memory == 32:
+                    self.frequency = random.choice([3000.0, 3200.0, 3600.0])
                 self.mod = ""
                 self.prefix = ""
             else:
